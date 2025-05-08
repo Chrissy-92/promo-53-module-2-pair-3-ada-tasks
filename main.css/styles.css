@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: lavenderblush;
+}
+
+.ada_header{
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    background-color: darkcyan;
+    color: white;
+}
