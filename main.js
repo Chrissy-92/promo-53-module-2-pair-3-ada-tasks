@@ -1,6 +1,8 @@
 'use strict'
 const texTaskAdd = document.querySelector('.js-text-task-add');
 const btnAdd = document.querySelector('.js-btn-add');
+const textTaskFilter = document.querySelector('.js-text-task-filter');
+const btnFilter = document.querySelector('.js-btn-filter');
 
 const tasks = [
   { name: "Recoger setas en el campo", completed: true, id: 1 },
@@ -15,7 +17,7 @@ const tasks = [
 
 let taskElement = "";
 let lista = document.querySelector(".task-list");
-let task ="";
+let task = "";
 
 for (const task of tasks) {
   taskElement += `<li>
@@ -42,6 +44,7 @@ lista.addEventListener("change", (ev) => {
   }
 });
 
+
 btnAdd.addEventListener('click', (ev) => {
   ev.preventDefault();
   const taskValue = texTaskAdd.value;
@@ -49,4 +52,31 @@ btnAdd.addEventListener('click', (ev) => {
   lista.innerHTML += taskElement;
   console.log(taskValue);
 });
+
+renderAllTasks = () => {
+  let html='';
+
+  for (task of tasks) {
+    html += renderOneTask(task);
+  }
+
+  lista.innerHTML = html;
+}
+
+const handleClickList = (ev) => {
+  ev.preventDefault();
+
+  const filterInput = textTaskFilter.value;
+  console.log(filterInput);
+  const tasksFiltered = tasks.filter( (tasks) => tasks.id === filterInput);
+  console.log(tasksFiltered);
+
+  renderAllTasks(tasksFiltered);
+
+};
+
+btnFilter.addEventListener('click', handleClickList);
+
+renderAllTasks(tasks);
+
     
