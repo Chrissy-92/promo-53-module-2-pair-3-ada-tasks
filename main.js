@@ -52,31 +52,44 @@ btnAdd.addEventListener('click', (ev) => {
   lista.innerHTML += taskElement;
   console.log(taskValue);
 });
+ const renderOneTask = (task) => {
+  return `<li>
+      <input 
+        type="checkbox" 
+        id="task-${task.id}" 
+        ${task.completed ? "" : "checked"}
+      />
+      <label for="task-${task.id}">${task.name}</label>
+    </li>`;
+};
+const renderAllTasks = (tasks) => {
+  let html = '';
 
-renderAllTasks = () => {
-  let html='';
-
-  for (task of tasks) {
+  for (const task of tasks) {
     html += renderOneTask(task);
   }
 
   lista.innerHTML = html;
-}
-
+};
 const handleClickList = (ev) => {
   ev.preventDefault();
 
-  const filterInput = textTaskFilter.value;
-  console.log(filterInput);
-  const tasksFiltered = tasks.filter( (tasks) => tasks.id === filterInput);
-  console.log(tasksFiltered);
+  const filtroTexto = textTaskFilter.value;
+  console.log(filtroTexto);
 
-  renderAllTasks(tasksFiltered);
+  const tareasFiltradas = tasks.filter((tarea) => 
+    tarea.name.toLowerCase().includes(filtroTexto.toLowerCase())
+  );
 
+  console.log(tareasFiltradas);
+  renderAllTasks(tareasFiltradas);
 };
+
 
 btnFilter.addEventListener('click', handleClickList);
 
 renderAllTasks(tasks);
+
+
 
     
